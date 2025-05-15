@@ -5,8 +5,19 @@
   <title>東京メトロ ネットワーク図</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson@3"></script>
   <script defer src="main.js"></script>
 </head>
 <body>
+  <label style="position:absolute;z-index:10;background:white;padding:5px">
+    地図背景表示:
+    <input type="checkbox" id="toggleMap">
+  </label>
+
+  <script>
+    // ✅ localStorage に保存された値でチェック状態を復元
+    const saved = localStorage.getItem("showMap");
+    document.getElementById("toggleMap").checked = saved !== "false";
+  </script>
 </body>
 </html>
