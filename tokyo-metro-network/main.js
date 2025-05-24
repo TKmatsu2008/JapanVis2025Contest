@@ -8,7 +8,7 @@ const DASH_GAP = 70;
 const FLOW_DISTANCE = 100;
 const MIN_WIDTH = 0.3;
 const MAX_WIDTH = 8;
-const selectedHours = ["01","06"];// 時間帯指定
+const selectedHours = ["06"];// 時間帯指定
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFrYWthaS1tYXAiLCJhIjoiY21iMXkxMzgyMDFpMjJsczl5NXZ2aHIybCJ9.R1eVrXB5fwLu95hV-BBY7w';
 
@@ -89,18 +89,18 @@ function renderNetwork(nodeData, edgeData) {
     return forward + reverse > 0;
   });
 
-  const edgeCounts = filteredEdges.map(d => {
-    const forward = averageFromHours(d.count_by_hour, selectedHours) || 0;
-    const reverse = averageFromHours(
+  const allEdgeCounts = edgeData.edges.map(d => {
+    const forwardAll = averageFromHours(d.count_by_hour, Object.keys(d.count_by_hour || {})) || 0;
+    const reverseAll = averageFromHours(
       edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count_by_hour,
-      selectedHours
+      Object.keys(d.count_by_hour || {})
     ) || 0;
-    return forward + reverse;
+    return forwardAll + reverseAll;
   });
-
-  const widthScale = d3.scaleLinear()
-    .domain(d3.extent(edgeCounts))
-    .range([MIN_WIDTH, MAX_WIDTH]);
+  
+    const widthScale = d3.scaleLinear()
+      .domain(d3.extent(allEdgeCounts))
+      .range([MIN_WIDTH, MAX_WIDTH]);
 
   // === SVG要素を準備（中身は後で更新） ===
   const lines = svg.selectAll(".line")
