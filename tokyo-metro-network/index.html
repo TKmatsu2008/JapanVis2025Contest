@@ -14,17 +14,15 @@
   <script defer src="main.js"></script>
 </head>
 <body>
-  <!-- <label class="control-panel">
-    マップスタイル:
-    <select id="styleSelector">
-      <option value="mapbox/streets-v12">Streets</option>
-      <option value="mapbox/outdoors-v12">Outdoors</option>
-      <option value="mapbox/light-v11">Light</option>
-      <option value="mapbox/dark-v11">Dark</option>
-      <option value="mapbox/satellite-v9">Satellites</option>
-    </select>
-  </label> -->
-
-  <div id="map"></div>
+  <div id="grid-container">
+    <!-- 24個のマップ用コンテナを自動生成 -->
+    <script>
+      for (let h = 0; h < 24; h++) {
+        const hh = String(h).padStart(2, '0');
+        document.write(`<div class="map-cell"><div class="mapbox" id="map${hh}"></div><div class="label">${hh}:00</div></div>`);
+      }
+    </script>
+  </div>
+  <script defer src="main.js"></script>
 </body>
 </html>
