@@ -1,37 +1,85 @@
+// 東京メトロ ネットワーク可視化 - 太さの差を調整可能にした点線アニメーション版
+
 const width = window.innerWidth;
 const height = window.innerHeight;
+const BASE_ANIMATION_TIME = 1000; // 1分あたりの基準時間（ms）
+const DASH_SOLID = 8;  // 点線の線の長さ
+const DASH_GAP = 12;   // 点線の間隔
+const FLOW_DISTANCE = 100; // 一度に流す距離（点線の動き量）
+const MIN_WIDTH = 0.1; // エッジの最小太さ
+const MAX_WIDTH = 10; // エッジの最大太さ
 
 const svg = d3.select("body").append("svg")
   .attr("width", width)
   .attr("height", height);
 
+document.getElementById("toggleMap").addEventListener("change", (e) => {
+  localStorage.setItem("showMap", e.target.checked);
+  window.location.reload();
+});
+
+const showMap = localStorage.getItem("showMap") !== "false";
+
 Promise.all([
   fetch("data/Node_metro.json").then(d => d.json()),
-  fetch("data/Edge_metro.json").then(d => d.json())
-]).then(([nodeData, edgeData]) => {
-    // 地理座標の範囲から SVG 座標にマッピング
-    const xScale = d3.scaleLinear()
-        .domain(d3.extent(nodeData.nodes, d => d.lon))
-        .range([50, width - 50]);
+  fetch("data/Edge_metro.json").then(d => d.json()),
+  showMap ? d3.json("https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson") : Promise.resolve(null)
+]).then(([nodeData, edgeData, geoData]) => {
+  const longitudes = nodeData.nodes.map(d => d.lon);
+  const latitudes = nodeData.nodes.map(d => d.lat);
+  const lonExtent = d3.extent(longitudes);
+  const latExtent = d3.extent(latitudes);
 
-    const yScale = d3.scaleLinear()
-        .domain(d3.extent(nodeData.nodes, d => d.lat))
-        .range([height - 50, 50]);
+  const projection = d3.geoMercator()
+    .center([(lonExtent[0] + lonExtent[1]) / 2, (latExtent[0] + latExtent[1]) / 2])
+    .translate([width / 2, height / 2])
+    .scale(1);
 
-    const nodes = nodeData.nodes.map(d => ({
-        id: d.id,
-        x: xScale(d.lon),
-        y: yScale(d.lat),
-        passengers: d.passengers
-    }));
+  const path = d3.geoPath().projection(projection);
+  const projectedMin = projection([lonExtent[0], latExtent[0]]);
+  const projectedMax = projection([lonExtent[1], latExtent[1]]);
+  const dx = projectedMax[0] - projectedMin[0];
+  const dy = projectedMax[1] - projectedMin[1];
+  const scale = 0.95 / Math.max(dx / width, dy / height);
+  projection.scale(scale);
+
+  if (showMap && geoData) {
+    svg.append("g")
+      .attr("class", "background-map")
+      .selectAll("path")
+      .data(geoData.features)
+      .join("path")
+      .attr("d", path)
+      .attr("fill", "#f1f1f1")
+      .attr("stroke", "#aaa");
+  }
+
+  renderNetwork(nodeData, edgeData, projection);
+});
+
+function renderNetwork(nodeData, edgeData, projection) {
+  const nodes = nodeData.nodes.map(d => {
+    const [x, y] = projection([d.lon, d.lat]);
+    return { id: d.id, x, y, passengers: d.passengers };
+  });
 
   const nodeMap = new Map(nodes.map(d => [d.id, d]));
 
-  // デバッグ用ログをここに追加！
-  console.log('ノード一覧:', nodes);
-  console.log('エッジ一覧:', edgeData.edges);
+  // --- エッジ太さスケーリング設定 ---
+  // 駅間の往復本数（countA→B + countB→A）を取得
+  const edgeCounts = edgeData.edges.map(d => {
+    const forward = d.count || 0;
+    const reverse = edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count || 0;
+    return forward + reverse;
+  });
 
-  // エッジの描画
+  // エッジ本数の最小〜最大を取得しスケーリング関数を定義
+  const countExtent = d3.extent(edgeCounts);
+  const widthScale = d3.scaleLinear()
+    .domain(countExtent)
+    .range([MIN_WIDTH, MAX_WIDTH]);
+
+  // --- エッジ（路線）描画とアニメーション ---
   svg.selectAll(".line")
     .data(edgeData.edges)
     .join("line")
@@ -41,24 +89,32 @@ Promise.all([
     .attr("x2", d => nodeMap.get(d.station_b)?.x)
     .attr("y2", d => nodeMap.get(d.station_b)?.y)
     .attr("stroke", d => d.line_color)
-    .attr("stroke-width", d => Math.sqrt(d.count))
+    // 太さを本数に応じてスケール変換
+    .attr("stroke-width", d => {
+      const forward = d.count || 0;
+      const reverse = edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count || 0;
+      return widthScale(forward + reverse);
+    })
     .attr("stroke-linecap", "round")
-    .attr("stroke-dasharray", "5 5")
-    .transition()
-    .duration(2000)
-    .ease(d3.easeSinInOut)
-    .attr("stroke-dasharray", "20 5")
-    .on("end", function repeat() {
-      d3.select(this)
-        .attr("stroke-dasharray", "5 5")
-        .transition()
-        .duration(2000)
-        .ease(d3.easeSinInOut)
-        .attr("stroke-dasharray", "20 5")
-        .on("end", repeat);
+    .attr("stroke-dasharray", `${DASH_SOLID} ${DASH_GAP}`)
+    .each(function animate(d) {
+      const line = d3.select(this);
+      const duration = (d.duration || 3) * BASE_ANIMATION_TIME;
+      let offset = -Math.random() * FLOW_DISTANCE;
+
+      line.attr("stroke-dashoffset", offset);
+
+      (function repeat() {
+        offset -= FLOW_DISTANCE;
+        line
+          .transition()
+          .duration(duration)
+          .ease(d3.easeLinear)
+          .attr("stroke-dashoffset", offset)
+          .on("end", repeat);
+      })();
     });
 
-    // ノードを描画
   svg.selectAll(".station")
     .data(nodes)
     .join("circle")
@@ -69,4 +125,16 @@ Promise.all([
     .attr("fill", "steelblue")
     .append("title")
     .text(d => d.id);
-});
+
+  const topStations = nodes.slice().sort((a, b) => b.passengers - a.passengers).slice(0, 20);
+
+  svg.selectAll(".station-label")
+    .data(topStations)
+    .join("text")
+    .attr("class", "station-label")
+    .attr("x", d => d.x + 6)
+    .attr("y", d => d.y - 6)
+    .text(d => d.id)
+    .attr("font-size", "10px")
+    .attr("fill", "#333");
+}
