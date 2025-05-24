@@ -1,9 +1,13 @@
-// ✅ 東京メトロ＋都営線ネットワーク可視化（全体が画面内に収まるよう調整済）
+// ✅ 東京メトロ＋都営線ネットワーク可視化（全体が画面内に収まるよう調整済 + 時間帯UI対応）
 
 // ==== ファイル名・時間帯の設定 ====
 const NODE_FILE = "data/Node_metro_toei.json";  // 駅ノードデータファイル
 const EDGE_FILE = "data/Edge_metro_toei_fulltime.json";  // エッジデータファイル
-const TIME_RANGE = [5, 10];  // 可視化対象の時間帯（例：5〜10時）
+
+// URLパラメータから時間帯（例: 5-10）を取得
+const urlParams = new URLSearchParams(window.location.search);
+const rangeStr = urlParams.get("range") || "5-10";
+const TIME_RANGE = rangeStr.split("-").map(d => +d);  // 例: [5, 10]
 
 // ==== SVGサイズと描画設定 ====
 const width = window.innerWidth;
@@ -33,8 +37,6 @@ Promise.all([
   fetch(EDGE_FILE).then(d => d.json()),
   showMap ? d3.json("https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson") : Promise.resolve(null)
 ]).then(([nodeData, edgeData, geoData]) => {
-  
-  // ==== fitExtentで地図範囲を画面内に収めるためGeoJSONに変換 ====
   const nodeGeoJSON = {
     type: "FeatureCollection",
     features: nodeData.nodes.map(d => ({
@@ -43,13 +45,11 @@ Promise.all([
     }))
   };
 
-  // ==== プロジェクション作成とfitExtentによる自動調整 ====
   const projection = d3.geoMercator()
-    .fitExtent([[20, 20], [width - 20, height - 20]], nodeGeoJSON);  // 四辺に余白20px
+    .fitExtent([[20, 20], [width - 20, height - 20]], nodeGeoJSON);
 
   const path = d3.geoPath().projection(projection);
 
-  // ==== 地図背景描画（表示ON時） ====
   if (showMap && geoData) {
     svg.append("g")
       .attr("class", "background-map")
@@ -61,22 +61,18 @@ Promise.all([
       .attr("stroke", "#aaa");
   }
 
-  // ==== 駅ネットワーク描画関数呼び出し ====
   renderNetwork(nodeData, edgeData, projection);
 });
 
 // ==== 駅ノードと路線エッジを描画する関数 ====
 function renderNetwork(nodeData, edgeData, projection) {
-  // ==== 駅座標の投影変換 ====
   const nodes = nodeData.nodes.map(d => {
     const [x, y] = projection([d.lon, d.lat]);
     return { id: d.id, x, y, passengers: d.passengers };
   });
 
-  // ==== 駅IDからノード参照用のMapを作成 ====
   const nodeMap = new Map(nodes.map(d => [d.id, d]));
 
-  // ==== 各路線の時間帯別頻度の合計を計算 ====
   const edgeFreqs = edgeData.edges.map(d => {
     const freqSum = Object.entries(d.count_by_hour || {})
       .filter(([h]) => +h >= TIME_RANGE[0] && +h <= TIME_RANGE[1])
@@ -84,11 +80,9 @@ function renderNetwork(nodeData, edgeData, projection) {
     return freqSum;
   });
 
-  // ==== 頻度に基づいてエッジの太さを線形スケール化 ====
   const freqExtent = d3.extent(edgeFreqs);
   const widthScale = d3.scaleLinear().domain(freqExtent).range([MIN_WIDTH, MAX_WIDTH]);
 
-  // ==== エッジ描画とアニメーション設定 ====
   svg.selectAll(".line")
     .data(edgeData.edges)
     .join("line")
@@ -122,7 +116,6 @@ function renderNetwork(nodeData, edgeData, projection) {
       })();
     });
 
-  // ==== 駅ノード（円）を描画 ====
   svg.selectAll(".station")
     .data(nodes)
     .join("circle")
@@ -134,7 +127,6 @@ function renderNetwork(nodeData, edgeData, projection) {
     .append("title")
     .text(d => d.id);
 
-  // ==== 主要駅ラベル（乗降者数上位20駅） ====
   const topStations = nodes.slice().sort((a, b) => b.passengers - a.passengers).slice(0, 20);
   svg.selectAll(".station-label")
     .data(topStations)

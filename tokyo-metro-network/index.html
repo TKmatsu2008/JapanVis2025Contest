@@ -9,15 +9,57 @@
   <script defer src="main.js"></script>
 </head>
 <body>
-  <label style="position:absolute;z-index:10;background:white;padding:5px">
+  <!-- 地図背景の表示切り替え -->
+  <label style="position:absolute;top:10px;left:10px;z-index:10;background:white;padding:5px">
     地図背景表示:
     <input type="checkbox" id="toggleMap">
   </label>
 
+  <!-- 時間帯選択スライダー（start, end） -->
+  <label style="position:absolute;top:60px;left:10px;z-index:10;background:white;padding:5px;display:flex;flex-direction:column;">
+    表示時間帯:
+    <span>
+      <input type="range" id="startHour" min="0" max="23" value="5">
+      <input type="range" id="endHour" min="1" max="24" value="10">
+    </span>
+    <span id="rangeLabel">5時〜10時</span>
+    <button id="updateTime">更新</button>
+  </label>
+
   <script>
-    // ✅ localStorage に保存された値でチェック状態を復元
+    // 地図背景の保存・復元
     const saved = localStorage.getItem("showMap");
     document.getElementById("toggleMap").checked = saved !== "false";
+
+    // URLパラメータ反映（スライダー）
+    const params = new URLSearchParams(window.location.search);
+    const rangeParam = params.get("range") || "5-10";
+    const [start, end] = rangeParam.split("-").map(Number);
+    document.getElementById("startHour").value = start;
+    document.getElementById("endHour").value = end;
+    document.getElementById("rangeLabel").textContent = `${start}時〜${end}時`;
+
+    // ラベル更新（リアルタイム表示）
+    document.getElementById("startHour").addEventListener("input", updateLabel);
+    document.getElementById("endHour").addEventListener("input", updateLabel);
+
+    function updateLabel() {
+      const s = parseInt(document.getElementById("startHour").value);
+      const e = parseInt(document.getElementById("endHour").value);
+      document.getElementById("rangeLabel").textContent = `${s}時〜${e}時`;
+    }
+
+    // 更新ボタンでrangeを変更
+    document.getElementById("updateTime").addEventListener("click", () => {
+      const s = parseInt(document.getElementById("startHour").value);
+      const e = parseInt(document.getElementById("endHour").value);
+      if (s < e) {
+        params.set("range", `${s}-${e}`);
+        window.location.search = params.toString();
+      } else {
+        alert("開始時刻は終了時刻より小さくしてください。");
+      }
+    });
   </script>
 </body>
 </html>
