@@ -8,7 +8,7 @@ const DASH_GAP = 70;
 const FLOW_DISTANCE = 100;
 const MIN_WIDTH = 0.3;
 const MAX_WIDTH = 8;
-const selectedHours = ["03"];// 時間帯指定
+const selectedHours = ["01","06"];// 時間帯指定
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFrYWthaS1tYXAiLCJhIjoiY21iMXkxMzgyMDFpMjJsczl5NXZ2aHIybCJ9.R1eVrXB5fwLu95hV-BBY7w';
 
@@ -80,7 +80,16 @@ function averageFromHours(obj, hours) {
 
 function renderNetwork(nodeData, edgeData) {
   // === スケール関数 ===
-  const edgeCounts = edgeData.edges.map(d => {
+  const filteredEdges = edgeData.edges.filter(d => {
+    const forward = averageFromHours(d.count_by_hour, selectedHours) || 0;
+    const reverse = averageFromHours(
+      edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count_by_hour,
+      selectedHours
+    ) || 0;
+    return forward + reverse > 0;
+  });
+
+  const edgeCounts = filteredEdges.map(d => {
     const forward = averageFromHours(d.count_by_hour, selectedHours) || 0;
     const reverse = averageFromHours(
       edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count_by_hour,
@@ -95,7 +104,7 @@ function renderNetwork(nodeData, edgeData) {
 
   // === SVG要素を準備（中身は後で更新） ===
   const lines = svg.selectAll(".line")
-    .data(edgeData.edges)
+    .data(filteredEdges)
     .join("line")
     .attr("class", "line")
     .attr("stroke", d => d.line_color)
