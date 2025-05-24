@@ -8,6 +8,7 @@ const DASH_GAP = 70;
 const FLOW_DISTANCE = 100;
 const MIN_WIDTH = 0.3;
 const MAX_WIDTH = 8;
+const selectedHours = ["03"];// 時間帯指定
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFrYWthaS1tYXAiLCJhIjoiY21iMXkxMzgyMDFpMjJsczl5NXZ2aHIybCJ9.R1eVrXB5fwLu95hV-BBY7w';
 
@@ -70,11 +71,21 @@ function project(lon, lat) {
   return [point.x, point.y];
 }
 
+function averageFromHours(obj, hours) {
+  const values = hours.map(h => obj?.[h]).filter(v => typeof v === 'number');
+  if (values.length === 0) return null;
+  return values.reduce((a, b) => a + b, 0) / values.length;
+}
+
+
 function renderNetwork(nodeData, edgeData) {
   // === スケール関数 ===
   const edgeCounts = edgeData.edges.map(d => {
-    const forward = d.count || 0;
-    const reverse = edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count || 0;
+    const forward = averageFromHours(d.count_by_hour, selectedHours) || 0;
+    const reverse = averageFromHours(
+      edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count_by_hour,
+      selectedHours
+    ) || 0;
     return forward + reverse;
   });
 
@@ -89,8 +100,11 @@ function renderNetwork(nodeData, edgeData) {
     .attr("class", "line")
     .attr("stroke", d => d.line_color)
     .attr("stroke-width", d => {
-      const forward = d.count || 0;
-      const reverse = edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count || 0;
+      const forward = averageFromHours(d.count_by_hour, selectedHours) || 0;
+      const reverse = averageFromHours(
+        edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count_by_hour,
+        selectedHours
+      ) || 0;
       return widthScale(forward + reverse);
     })
     .attr("stroke-linecap", "round")
@@ -98,7 +112,8 @@ function renderNetwork(nodeData, edgeData) {
     .attr("stroke-opacity", 0.7)
     .each(function animate(d) {
       const line = d3.select(this);
-      const duration = (d.duration || 3) * BASE_ANIMATION_TIME;
+      const avgTime = averageFromHours(d.average_time_by_hour, selectedHours);
+      const duration = (avgTime || 3) * BASE_ANIMATION_TIME;
       let offset = -Math.random() * FLOW_DISTANCE;
       line.attr("stroke-dashoffset", offset);
       (function repeat() {
