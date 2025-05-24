@@ -3,12 +3,12 @@
 const width = window.innerWidth;
 const height = window.innerHeight;
 const BASE_ANIMATION_TIME = 500;
-const DASH_SOLID = 10;
-const DASH_GAP = 70;
+const DASH_SOLID = 20;
+const DASH_GAP = 100;
 const FLOW_DISTANCE = 100;
 const MIN_WIDTH = 0.3;
-const MAX_WIDTH = 8;
-const selectedHours = ["06"];// 時間帯指定
+const MAX_WIDTH = 6;
+const selectedHours = ["05"];// 時間帯指定
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFrYWthaS1tYXAiLCJhIjoiY21iMXkxMzgyMDFpMjJsczl5NXZ2aHIybCJ9.R1eVrXB5fwLu95hV-BBY7w';
 
