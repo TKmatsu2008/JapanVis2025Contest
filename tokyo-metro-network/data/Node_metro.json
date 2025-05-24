@@ -1,0 +1,1813 @@
+{
+  "metadata": {
+    "generated_at": "2025-05-11T01:36:21.734903",
+    "passenger_survey_year": 2023
+  },
+  "nodes": [
+    {
+      "id": "上野",
+      "codes": [
+        "H18",
+        "G16"
+      ],
+      "lines": [
+        "Hibiya",
+        "Ginza"
+      ],
+      "lat": 35.711835,
+      "lon": 139.775625,
+      "passengers": 360564
+    },
+    {
+      "id": "赤坂",
+      "codes": [
+        "C06"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.672104,
+      "lon": 139.736413,
+      "passengers": 74174
+    },
+    {
+      "id": "綾瀬",
+      "codes": [
+        "C19"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.762285,
+      "lon": 139.82489,
+      "passengers": 372622
+    },
+    {
+      "id": "日比谷",
+      "codes": [
+        "H08",
+        "C09"
+      ],
+      "lines": [
+        "Hibiya",
+        "Chiyoda"
+      ],
+      "lat": 35.673955,
+      "lon": 139.758765,
+      "passengers": 180860
+    },
+    {
+      "id": "霞ケ関",
+      "codes": [
+        "C08",
+        "H07",
+        "M15"
+      ],
+      "lines": [
+        "Hibiya",
+        "Chiyoda",
+        "Marunouchi"
+      ],
+      "lat": 35.67256,
+      "lon": 139.75177,
+      "passengers": 385659
+    },
+    {
+      "id": "北綾瀬",
+      "codes": [
+        "C20"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.77689,
+      "lon": 139.832095,
+      "passengers": 40648
+    },
+    {
+      "id": "北千住",
+      "codes": [
+        "H22",
+        "C18"
+      ],
+      "lines": [
+        "Hibiya",
+        "Chiyoda"
+      ],
+      "lat": 35.7492,
+      "lon": 139.804403,
+      "passengers": 498867
+    },
+    {
+      "id": "国会議事堂前",
+      "codes": [
+        "C07",
+        "M14"
+      ],
+      "lines": [
+        "Marunouchi",
+        "Chiyoda"
+      ],
+      "lat": 35.673566,
+      "lon": 139.743188,
+      "passengers": 226322
+    },
+    {
+      "id": "町屋",
+      "codes": [
+        "C17"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.742068,
+      "lon": 139.780047,
+      "passengers": 59032
+    },
+    {
+      "id": "明治神宮前〈原宿〉",
+      "codes": [
+        "F15",
+        "C03"
+      ],
+      "lines": [
+        "Chiyoda",
+        "Fukutoshin"
+      ],
+      "lat": 35.669123,
+      "lon": 139.703944,
+      "passengers": 192690
+    },
+    {
+      "id": "根津",
+      "codes": [
+        "C14"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.717325,
+      "lon": 139.76575,
+      "passengers": 26589
+    },
+    {
+      "id": "二重橋前〈丸の内〉",
+      "codes": [
+        "C10"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.680505,
+      "lon": 139.76178,
+      "passengers": 32782
+    },
+    {
+      "id": "西日暮里",
+      "codes": [
+        "C16"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.732355,
+      "lon": 139.76689,
+      "passengers": 151039
+    },
+    {
+      "id": "乃木坂",
+      "codes": [
+        "C05"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.666592,
+      "lon": 139.726229,
+      "passengers": 39229
+    },
+    {
+      "id": "表参道",
+      "codes": [
+        "G02",
+        "H02",
+        "C04"
+      ],
+      "lines": [
+        "Hanzomon",
+        "Chiyoda",
+        "Ginza"
+      ],
+      "lat": 35.665652,
+      "lon": 139.711346,
+      "passengers": 506373
+    },
+    {
+      "id": "湯島",
+      "codes": [
+        "C13"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.706805,
+      "lon": 139.769981,
+      "passengers": 35983
+    },
+    {
+      "id": "大手町",
+      "codes": [
+        "C11",
+        "M18",
+        "H08",
+        "T09"
+      ],
+      "lines": [
+        "Marunouchi",
+        "Tozai",
+        "Chiyoda",
+        "Hanzomon"
+      ],
+      "lat": 35.68525,
+      "lon": 139.763285,
+      "passengers": 1248164
+    },
+    {
+      "id": "千駄木",
+      "codes": [
+        "C15"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.725746,
+      "lon": 139.763303,
+      "passengers": 27607
+    },
+    {
+      "id": "新御茶ノ水",
+      "codes": [
+        "C12"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.696925,
+      "lon": 139.76545,
+      "passengers": 83430
+    },
+    {
+      "id": "代々木公園",
+      "codes": [
+        "C02"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.669104,
+      "lon": 139.689791,
+      "passengers": 27333
+    },
+    {
+      "id": "代々木上原",
+      "codes": [
+        "C01"
+      ],
+      "lines": [
+        "Chiyoda"
+      ],
+      "lat": 35.669017,
+      "lon": 139.679884,
+      "passengers": 267748
+    },
+    {
+      "id": "地下鉄赤塚",
+      "codes": [
+        "Y03",
+        "F03"
+      ],
+      "lines": [
+        "Yurakucho",
+        "Fukutoshin"
+      ],
+      "lat": 35.76998,
+      "lon": 139.644001,
+      "passengers": 78360
+    },
+    {
+      "id": "地下鉄成増",
+      "codes": [
+        "Y02",
+        "F02"
+      ],
+      "lines": [
+        "Yurakucho",
+        "Fukutoshin"
+      ],
+      "lat": 35.77674,
+      "lon": 139.63117,
+      "passengers": 95612
+    },
+    {
+      "id": "平和台",
+      "codes": [
+        "F04",
+        "Y04"
+      ],
+      "lines": [
+        "Yurakucho",
+        "Fukutoshin"
+      ],
+      "lat": 35.757555,
+      "lon": 139.6543,
+      "passengers": 82538
+    },
+    {
+      "id": "東新宿",
+      "codes": [
+        "F12"
+      ],
+      "lines": [
+        "Fukutoshin"
+      ],
+      "lat": 35.699829,
+      "lon": 139.707846,
+      "passengers": 39476
+    },
+    {
+      "id": "氷川台",
+      "codes": [
+        "Y05",
+        "F05"
+      ],
+      "lines": [
+        "Yurakucho",
+        "Fukutoshin"
+      ],
+      "lat": 35.74962,
+      "lon": 139.66547,
+      "passengers": 73688
+    },
+    {
+      "id": "池袋",
+      "codes": [
+        "M25",
+        "F09",
+        "Y09"
+      ],
+      "lines": [
+        "Marunouchi",
+        "Yurakucho",
+        "Fukutoshin"
+      ],
+      "lat": 35.730345,
+      "lon": 139.71115,
+      "passengers": 1502082
+    },
+    {
+      "id": "要町",
+      "codes": [
+        "F08",
+        "Y08"
+      ],
+      "lines": [
+        "Yurakucho",
+        "Fukutoshin"
+      ],
+      "lat": 35.733215,
+      "lon": 139.69848,
+      "passengers": 77728
+    },
+    {
+      "id": "北参道",
+      "codes": [
+        "F14"
+      ],
+      "lines": [
+        "Fukutoshin"
+      ],
+      "lat": 35.678503,
+      "lon": 139.705469,
+      "passengers": 22635
+    },
+    {
+      "id": "小竹向原",
+      "codes": [
+        "F06",
+        "Y06"
+      ],
+      "lines": [
+        "Yurakucho",
+        "Fukutoshin"
+      ],
+      "lat": 35.743395,
+      "lon": 139.67952,
+      "passengers": 341474
+    },
+    {
+      "id": "外苑前",
+      "codes": [
+        "G03"
+      ],
+      "lines": [
+        "Ginza"
+      ],
+      "lat": 35.670375,
+      "lon": 139.717825,
+      "passengers": 72412
+    },
+    {
+      "id": "西早稲田",
+      "codes": [
+        "F11"
+      ],
+      "lines": [
+        "Fukutoshin"
+      ],
+      "lat": 35.707806,
+      "lon": 139.70912,
+      "passengers": 35647
+    },
+    {
+      "id": "千川",
+      "codes": [
+        "F07",
+        "Y07"
+      ],
+      "lines": [
+        "Yurakucho",
+        "Fukutoshin"
+      ],
+      "lat": 35.738175,
+      "lon": 139.6894,
+      "passengers": 74502
+    },
+    {
+      "id": "渋谷",
+      "codes": [
+        "H01",
+        "F16",
+        "G01"
+      ],
+      "lines": [
+        "Hanzomon",
+        "Fukutoshin",
+        "Ginza"
+      ],
+      "lat": 35.659092,
+      "lon": 139.70257,
+      "passengers": 1621869
+    },
+    {
+      "id": "浅草",
+      "codes": [
+        "G19"
+      ],
+      "lines": [
+        "Ginza"
+      ],
+      "lat": 35.710746,
+      "lon": 139.797774,
+      "passengers": 101926
+    },
+    {
+      "id": "新宿三丁目",
+      "codes": [
+        "F13",
+        "M09"
+      ],
+      "lines": [
+        "Marunouchi",
+        "Fukutoshin"
+      ],
+      "lat": 35.690609,
+      "lon": 139.704727,
+      "passengers": 285734
+    },
+    {
+      "id": "和光市",
+      "codes": [
+        "Y01",
+        "F01"
+      ],
+      "lines": [
+        "Yurakucho",
+        "Fukutoshin"
+      ],
+      "lat": 35.78835,
+      "lon": 139.612865,
+      "passengers": 337904
+    },
+    {
+      "id": "雑司が谷",
+      "codes": [
+        "F10"
+      ],
+      "lines": [
+        "Fukutoshin"
+      ],
+      "lat": 35.7202,
+      "lon": 139.714715,
+      "passengers": 18916
+    },
+    {
+      "id": "赤坂見附",
+      "codes": [
+        "G05",
+        "M13"
+      ],
+      "lines": [
+        "Marunouchi",
+        "Ginza"
+      ],
+      "lat": 35.676845,
+      "lon": 139.737347,
+      "passengers": 172986
+    },
+    {
+      "id": "青山一丁目",
+      "codes": [
+        "G04",
+        "H03"
+      ],
+      "lines": [
+        "Hanzomon",
+        "Ginza"
+      ],
+      "lat": 35.67279,
+      "lon": 139.724145,
+      "passengers": 187018
+    },
+    {
+      "id": "銀座",
+      "codes": [
+        "M16",
+        "G09",
+        "H09"
+      ],
+      "lines": [
+        "Hibiya",
+        "Marunouchi",
+        "Ginza"
+      ],
+      "lat": 35.6715,
+      "lon": 139.765366,
+      "passengers": 651732
+    },
+    {
+      "id": "稲荷町",
+      "codes": [
+        "G17"
+      ],
+      "lines": [
+        "Ginza"
+      ],
+      "lat": 35.711389,
+      "lon": 139.78221,
+      "passengers": 17533
+    },
+    {
+      "id": "神田",
+      "codes": [
+        "G13"
+      ],
+      "lines": [
+        "Ginza"
+      ],
+      "lat": 35.693715,
+      "lon": 139.77089,
+      "passengers": 53604
+    },
+    {
+      "id": "京橋",
+      "codes": [
+        "G10"
+      ],
+      "lines": [
+        "Ginza"
+      ],
+      "lat": 35.676704,
+      "lon": 139.77011,
+      "passengers": 50698
+    },
+    {
+      "id": "三越前",
+      "codes": [
+        "G12",
+        "H09"
+      ],
+      "lines": [
+        "Hanzomon",
+        "Ginza"
+      ],
+      "lat": 35.687173,
+      "lon": 139.773582,
+      "passengers": 221332
+    },
+    {
+      "id": "日本橋",
+      "codes": [
+        "G11",
+        "T10"
+      ],
+      "lines": [
+        "Tozai",
+        "Ginza"
+      ],
+      "lat": 35.681879,
+      "lon": 139.773335,
+      "passengers": 326254
+    },
+    {
+      "id": "錦糸町",
+      "codes": [
+        "H13"
+      ],
+      "lines": [
+        "Hanzomon"
+      ],
+      "lat": 35.697441,
+      "lon": 139.814957,
+      "passengers": 100039
+    },
+    {
+      "id": "上野広小路",
+      "codes": [
+        "G15"
+      ],
+      "lines": [
+        "Ginza"
+      ],
+      "lat": 35.707765,
+      "lon": 139.773011,
+      "passengers": 23792
+    },
+    {
+      "id": "新橋",
+      "codes": [
+        "G08"
+      ],
+      "lines": [
+        "Ginza"
+      ],
+      "lat": 35.667382,
+      "lon": 139.758512,
+      "passengers": 194374
+    },
+    {
+      "id": "末広町",
+      "codes": [
+        "G14"
+      ],
+      "lines": [
+        "Ginza"
+      ],
+      "lat": 35.70278,
+      "lon": 139.771762,
+      "passengers": 24601
+    },
+    {
+      "id": "溜池山王",
+      "codes": [
+        "N06",
+        "G06"
+      ],
+      "lines": [
+        "Ginza",
+        "Namboku"
+      ],
+      "lat": 35.671511,
+      "lon": 139.741943,
+      "passengers": 226322
+    },
+    {
+      "id": "田原町",
+      "codes": [
+        "G18"
+      ],
+      "lines": [
+        "Ginza"
+      ],
+      "lat": 35.709917,
+      "lon": 139.790306,
+      "passengers": 33290
+    },
+    {
+      "id": "虎ノ門",
+      "codes": [
+        "G07"
+      ],
+      "lines": [
+        "Ginza"
+      ],
+      "lat": 35.67016,
+      "lon": 139.75012,
+      "passengers": 91260
+    },
+    {
+      "id": "半蔵門",
+      "codes": [
+        "H05"
+      ],
+      "lines": [
+        "Hanzomon"
+      ],
+      "lat": 35.68538,
+      "lon": 139.741695,
+      "passengers": 71847
+    },
+    {
+      "id": "神保町",
+      "codes": [
+        "H07"
+      ],
+      "lines": [
+        "Hanzomon"
+      ],
+      "lat": 35.696021,
+      "lon": 139.75756,
+      "passengers": 81664
+    },
+    {
+      "id": "清澄白河",
+      "codes": [
+        "H11"
+      ],
+      "lines": [
+        "Hanzomon"
+      ],
+      "lat": 35.682119,
+      "lon": 139.799841,
+      "passengers": 54925
+    },
+    {
+      "id": "中目黒",
+      "codes": [
+        "H01"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.644108,
+      "lon": 139.698833,
+      "passengers": 193274
+    },
+    {
+      "id": "九段下",
+      "codes": [
+        "T07",
+        "H06"
+      ],
+      "lines": [
+        "Tozai",
+        "Hanzomon"
+      ],
+      "lat": 35.695501,
+      "lon": 139.751117,
+      "passengers": 306484
+    },
+    {
+      "id": "永田町",
+      "codes": [
+        "H04",
+        "N07",
+        "Y16"
+      ],
+      "lines": [
+        "Yurakucho",
+        "Hanzomon",
+        "Namboku"
+      ],
+      "lat": 35.678407,
+      "lon": 139.738865,
+      "passengers": 216732
+    },
+    {
+      "id": "押上〈スカイツリー前〉",
+      "codes": [
+        "H14"
+      ],
+      "lines": [
+        "Hanzomon"
+      ],
+      "lat": 35.708467,
+      "lon": 139.813735,
+      "passengers": 174863
+    },
+    {
+      "id": "水天宮前",
+      "codes": [
+        "H10"
+      ],
+      "lines": [
+        "Hanzomon"
+      ],
+      "lat": 35.683,
+      "lon": 139.785171,
+      "passengers": 68185
+    },
+    {
+      "id": "西新宿",
+      "codes": [
+        "M07"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.694515,
+      "lon": 139.69256,
+      "passengers": 77992
+    },
+    {
+      "id": "住吉",
+      "codes": [
+        "H12"
+      ],
+      "lines": [
+        "Hanzomon"
+      ],
+      "lat": 35.688704,
+      "lon": 139.815667,
+      "passengers": 52392
+    },
+    {
+      "id": "秋葉原",
+      "codes": [
+        "H16"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.697965,
+      "lon": 139.775529,
+      "passengers": 107333
+    },
+    {
+      "id": "恵比寿",
+      "codes": [
+        "H02"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.64704,
+      "lon": 139.708701,
+      "passengers": 98329
+    },
+    {
+      "id": "八丁堀",
+      "codes": [
+        "H12"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.675368,
+      "lon": 139.777334,
+      "passengers": 98923
+    },
+    {
+      "id": "三ノ輪",
+      "codes": [
+        "H20"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.729285,
+      "lon": 139.791165,
+      "passengers": 43935
+    },
+    {
+      "id": "東銀座",
+      "codes": [
+        "H10"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.669129,
+      "lon": 139.767633,
+      "passengers": 76513
+    },
+    {
+      "id": "広尾",
+      "codes": [
+        "H03"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.651499,
+      "lon": 139.722209,
+      "passengers": 56837
+    },
+    {
+      "id": "入谷",
+      "codes": [
+        "H19"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.720565,
+      "lon": 139.784466,
+      "passengers": 36239
+    },
+    {
+      "id": "神谷町",
+      "codes": [
+        "H05"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.662625,
+      "lon": 139.744725,
+      "passengers": 88969
+    },
+    {
+      "id": "茅場町",
+      "codes": [
+        "T11",
+        "H13"
+      ],
+      "lines": [
+        "Hibiya",
+        "Tozai"
+      ],
+      "lat": 35.679078,
+      "lon": 139.779619,
+      "passengers": 211754
+    },
+    {
+      "id": "小伝馬町",
+      "codes": [
+        "H15"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.690423,
+      "lon": 139.778758,
+      "passengers": 35203
+    },
+    {
+      "id": "南千住",
+      "codes": [
+        "H21"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.73231,
+      "lon": 139.79878,
+      "passengers": 31318
+    },
+    {
+      "id": "仲御徒町",
+      "codes": [
+        "H17"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.706655,
+      "lon": 139.77619,
+      "passengers": 39625
+    },
+    {
+      "id": "人形町",
+      "codes": [
+        "H14"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.686259,
+      "lon": 139.782339,
+      "passengers": 65602
+    },
+    {
+      "id": "六本木",
+      "codes": [
+        "H04"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.6628,
+      "lon": 139.731155,
+      "passengers": 105196
+    },
+    {
+      "id": "虎ノ門ヒルズ",
+      "codes": [
+        "H06"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.667309,
+      "lon": 139.747738,
+      "passengers": 45172
+    },
+    {
+      "id": "築地",
+      "codes": [
+        "H11"
+      ],
+      "lines": [
+        "Hibiya"
+      ],
+      "lat": 35.667928,
+      "lon": 139.772473,
+      "passengers": 58868
+    },
+    {
+      "id": "淡路町",
+      "codes": [
+        "M19"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.69487,
+      "lon": 139.767455,
+      "passengers": 54977
+    },
+    {
+      "id": "東高円寺",
+      "codes": [
+        "M04"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.697965,
+      "lon": 139.658295,
+      "passengers": 31918
+    },
+    {
+      "id": "本郷三丁目",
+      "codes": [
+        "M21"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.706726,
+      "lon": 139.760154,
+      "passengers": 49496
+    },
+    {
+      "id": "御茶ノ水",
+      "codes": [
+        "M20"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.70043,
+      "lon": 139.764405,
+      "passengers": 51922
+    },
+    {
+      "id": "後楽園",
+      "codes": [
+        "M22",
+        "N11"
+      ],
+      "lines": [
+        "Marunouchi",
+        "Namboku"
+      ],
+      "lat": 35.707307,
+      "lon": 139.750861,
+      "passengers": 198102
+    },
+    {
+      "id": "南阿佐ケ谷",
+      "codes": [
+        "M02"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.699455,
+      "lon": 139.635575,
+      "passengers": 26654
+    },
+    {
+      "id": "茗荷谷",
+      "codes": [
+        "M23"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.7172,
+      "lon": 139.736895,
+      "passengers": 76244
+    },
+    {
+      "id": "中野坂上",
+      "codes": [
+        "M06"
+      ],
+      "lines": [
+        "Marunouchi",
+        "MarunouchiBranch"
+      ],
+      "lat": 35.697085,
+      "lon": 139.682205,
+      "passengers": 141410
+    },
+    {
+      "id": "荻窪",
+      "codes": [
+        "M01"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.704175,
+      "lon": 139.61976,
+      "passengers": 82039
+    },
+    {
+      "id": "新高円寺",
+      "codes": [
+        "M03"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.69786,
+      "lon": 139.64851,
+      "passengers": 34052
+    },
+    {
+      "id": "新中野",
+      "codes": [
+        "M05"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.697475,
+      "lon": 139.66951,
+      "passengers": 32950
+    },
+    {
+      "id": "新大塚",
+      "codes": [
+        "M24"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.72613,
+      "lon": 139.729354,
+      "passengers": 25095
+    },
+    {
+      "id": "新宿御苑前",
+      "codes": [
+        "M10"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.688525,
+      "lon": 139.710915,
+      "passengers": 47369
+    },
+    {
+      "id": "新宿",
+      "codes": [
+        "M08"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.692452,
+      "lon": 139.700548,
+      "passengers": 193170
+    },
+    {
+      "id": "東京",
+      "codes": [
+        "M17"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.681935,
+      "lon": 139.7648,
+      "passengers": 186253
+    },
+    {
+      "id": "四谷三丁目",
+      "codes": [
+        "M11"
+      ],
+      "lines": [
+        "Marunouchi"
+      ],
+      "lat": 35.687835,
+      "lon": 139.719325,
+      "passengers": 41217
+    },
+    {
+      "id": "四ツ谷",
+      "codes": [
+        "M12",
+        "N08"
+      ],
+      "lines": [
+        "Marunouchi",
+        "Namboku"
+      ],
+      "lat": 35.684197,
+      "lon": 139.730047,
+      "passengers": 222752
+    },
+    {
+      "id": "方南町",
+      "codes": [],
+      "lines": [
+        "MarunouchiBranch"
+      ],
+      "lat": 35.683515,
+      "lon": 139.657935,
+      "passengers": 38148
+    },
+    {
+      "id": "中野富士見町",
+      "codes": [],
+      "lines": [
+        "MarunouchiBranch"
+      ],
+      "lat": 35.69082,
+      "lon": 139.668155,
+      "passengers": 18372
+    },
+    {
+      "id": "中野新橋",
+      "codes": [],
+      "lines": [
+        "MarunouchiBranch"
+      ],
+      "lat": 35.691685,
+      "lon": 139.674001,
+      "passengers": 19605
+    },
+    {
+      "id": "赤羽岩淵",
+      "codes": [
+        "N19"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.783355,
+      "lon": 139.72211,
+      "passengers": 89097
+    },
+    {
+      "id": "麻布十番",
+      "codes": [
+        "N04"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.65481,
+      "lon": 139.737045,
+      "passengers": 41990
+    },
+    {
+      "id": "本駒込",
+      "codes": [
+        "N13"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.724365,
+      "lon": 139.753812,
+      "passengers": 20191
+    },
+    {
+      "id": "市ケ谷",
+      "codes": [
+        "N09",
+        "Y14"
+      ],
+      "lines": [
+        "Yurakucho",
+        "Namboku"
+      ],
+      "lat": 35.692894,
+      "lon": 139.736324,
+      "passengers": 254190
+    },
+    {
+      "id": "西ケ原",
+      "codes": [
+        "N15"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.745945,
+      "lon": 139.74226,
+      "passengers": 8735
+    },
+    {
+      "id": "飯田橋",
+      "codes": [
+        "T06",
+        "N10",
+        "Y13"
+      ],
+      "lines": [
+        "Tozai",
+        "Yurakucho",
+        "Namboku"
+      ],
+      "lat": 35.701532,
+      "lon": 139.743716,
+      "passengers": 452358
+    },
+    {
+      "id": "駒込",
+      "codes": [
+        "N14"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.735913,
+      "lon": 139.746909,
+      "passengers": 36384
+    },
+    {
+      "id": "目黒",
+      "codes": [
+        "N01"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.632485,
+      "lon": 139.71566,
+      "passengers": 101677
+    },
+    {
+      "id": "王子神谷",
+      "codes": [
+        "N17"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.765292,
+      "lon": 139.735641,
+      "passengers": 34794
+    },
+    {
+      "id": "王子",
+      "codes": [
+        "N16"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.75447,
+      "lon": 139.737362,
+      "passengers": 57821
+    },
+    {
+      "id": "六本木一丁目",
+      "codes": [
+        "N05"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.665075,
+      "lon": 139.7389,
+      "passengers": 68808
+    },
+    {
+      "id": "志茂",
+      "codes": [
+        "N18"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.778025,
+      "lon": 139.7325,
+      "passengers": 14514
+    },
+    {
+      "id": "白金高輪",
+      "codes": [
+        "N03"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.643145,
+      "lon": 139.734285,
+      "passengers": 35889
+    },
+    {
+      "id": "白金台",
+      "codes": [
+        "N02"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.63777,
+      "lon": 139.72586,
+      "passengers": 16112
+    },
+    {
+      "id": "東大前",
+      "codes": [
+        "N12"
+      ],
+      "lines": [
+        "Namboku"
+      ],
+      "lat": 35.718014,
+      "lon": 139.75788,
+      "passengers": 25870
+    },
+    {
+      "id": "原木中山",
+      "codes": [
+        "T22"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.7033,
+      "lon": 139.941915,
+      "passengers": 26349
+    },
+    {
+      "id": "行徳",
+      "codes": [
+        "T20"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.68262,
+      "lon": 139.914185,
+      "passengers": 52701
+    },
+    {
+      "id": "神楽坂",
+      "codes": [
+        "T05"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.703865,
+      "lon": 139.73452,
+      "passengers": 38583
+    },
+    {
+      "id": "葛西",
+      "codes": [
+        "T17"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.663616,
+      "lon": 139.87253,
+      "passengers": 95955
+    },
+    {
+      "id": "木場",
+      "codes": [
+        "T13"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.669356,
+      "lon": 139.807115,
+      "passengers": 69105
+    },
+    {
+      "id": "南行徳",
+      "codes": [
+        "T19"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.672729,
+      "lon": 139.902276,
+      "passengers": 49381
+    },
+    {
+      "id": "南砂町",
+      "codes": [
+        "T15"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.668415,
+      "lon": 139.831695,
+      "passengers": 58300
+    },
+    {
+      "id": "門前仲町",
+      "codes": [
+        "T12"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.671892,
+      "lon": 139.796099,
+      "passengers": 101848
+    },
+    {
+      "id": "妙典",
+      "codes": [
+        "T21"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.691014,
+      "lon": 139.924286,
+      "passengers": 48489
+    },
+    {
+      "id": "中野",
+      "codes": [
+        "T01"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.70574,
+      "lon": 139.665605,
+      "passengers": 134499
+    },
+    {
+      "id": "西船橋",
+      "codes": [
+        "T23"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.707174,
+      "lon": 139.958767,
+      "passengers": 258255
+    },
+    {
+      "id": "西葛西",
+      "codes": [
+        "T16"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.664562,
+      "lon": 139.8596,
+      "passengers": 94293
+    },
+    {
+      "id": "落合",
+      "codes": [
+        "T02"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.710635,
+      "lon": 139.685965,
+      "passengers": 25129
+    },
+    {
+      "id": "高田馬場",
+      "codes": [
+        "T03"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.71328,
+      "lon": 139.705045,
+      "passengers": 167360
+    },
+    {
+      "id": "竹橋",
+      "codes": [
+        "T08"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.69044,
+      "lon": 139.75767,
+      "passengers": 40940
+    },
+    {
+      "id": "東陽町",
+      "codes": [
+        "T14"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.66959,
+      "lon": 139.81768,
+      "passengers": 111204
+    },
+    {
+      "id": "浦安",
+      "codes": [
+        "T18"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.665903,
+      "lon": 139.893236,
+      "passengers": 76578
+    },
+    {
+      "id": "早稲田",
+      "codes": [
+        "T04"
+      ],
+      "lines": [
+        "Tozai"
+      ],
+      "lat": 35.70568,
+      "lon": 139.72219,
+      "passengers": 76014
+    },
+    {
+      "id": "江戸川橋",
+      "codes": [
+        "Y12"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.709295,
+      "lon": 139.73413,
+      "passengers": 48975
+    },
+    {
+      "id": "銀座一丁目",
+      "codes": [
+        "Y19"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.674519,
+      "lon": 139.766786,
+      "passengers": 32240
+    },
+    {
+      "id": "護国寺",
+      "codes": [
+        "Y11"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.71918,
+      "lon": 139.72745,
+      "passengers": 39316
+    },
+    {
+      "id": "東池袋",
+      "codes": [
+        "Y10"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.72595,
+      "lon": 139.718865,
+      "passengers": 42748
+    },
+    {
+      "id": "麴町",
+      "codes": [
+        "Y15"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.684785,
+      "lon": 139.73735,
+      "passengers": 54142
+    },
+    {
+      "id": "桜田門",
+      "codes": [
+        "Y17"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.677459,
+      "lon": 139.751886,
+      "passengers": 13025
+    },
+    {
+      "id": "新木場",
+      "codes": [
+        "Y24"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.64578,
+      "lon": 139.826605,
+      "passengers": 91236
+    },
+    {
+      "id": "新富町",
+      "codes": [
+        "Y20"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.670529,
+      "lon": 139.773594,
+      "passengers": 35708
+    },
+    {
+      "id": "辰巳",
+      "codes": [
+        "Y23"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.645775,
+      "lon": 139.81033,
+      "passengers": 27148
+    },
+    {
+      "id": "豊洲",
+      "codes": [
+        "Y22"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.655153,
+      "lon": 139.795994,
+      "passengers": 202030
+    },
+    {
+      "id": "月島",
+      "codes": [
+        "Y21"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.664711,
+      "lon": 139.784405,
+      "passengers": 67069
+    },
+    {
+      "id": "有楽町",
+      "codes": [
+        "Y18"
+      ],
+      "lines": [
+        "Yurakucho"
+      ],
+      "lat": 35.675973,
+      "lon": 139.762286,
+      "passengers": 134610
+    }
+  ]
+}
