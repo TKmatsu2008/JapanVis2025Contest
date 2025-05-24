@@ -36,15 +36,14 @@ Promise.all([
 });
 
 function setupMapView(containerId, label, selectedHours, nodeData, edgeData) {
-  const showLogo = (label === "深夜");
   const map = new mapboxgl.Map({
     container: containerId,
     style: 'mapbox://styles/mapbox/dark-v10',
     center: globalCenter,
     zoom: globalZoom,
     interactive: true,
-    attributionControl: false,
-    logoPosition: showLogo ? "bottom-right" : undefined
+    // attributionControl: false,
+    // logoPosition: "bottom-right"
   });
 
   allMaps.push(map);

@@ -38,18 +38,17 @@ body {
   pointer-events: none;
 }
 
-
+/* 
 .mapboxgl-ctrl-logo,
 .mapboxgl-ctrl-attrib {
   display: none !important;
-}
+} */
 
-#map-深夜 .mapboxgl-ctrl-logo,
-#map-深夜 .mapboxgl-ctrl-attrib {
-  display: block !important;
+/* .mapboxgl-ctrl-logo,
+.mapboxgl-ctrl-attrib {
+  display: none !important;
   opacity: 0.4;
   position: absolute !important;
-  bottom: 4px;
   right: 6px;
   font-size: 10px;
-}
+} */
