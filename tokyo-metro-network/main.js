@@ -21,8 +21,8 @@ document.getElementById("toggleMap").addEventListener("change", (e) => {
 const showMap = localStorage.getItem("showMap") !== "false";
 
 Promise.all([
-  fetch("data/Node_metro.json").then(d => d.json()),
-  fetch("data/Edge_metro.json").then(d => d.json()),
+  fetch("data/Node_metro_toei.json").then(d => d.json()),
+  fetch("data/Edge_metro_toei_fulltime.json").then(d => d.json()),
   showMap ? d3.json("https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson") : Promise.resolve(null)
 ]).then(([nodeData, edgeData, geoData]) => {
   const longitudes = nodeData.nodes.map(d => d.lon);
