@@ -3,21 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>東京メトロ ネットワーク図</title>
-  <link rel="stylesheet" href="style.css">
+
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  
   <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://unpkg.com/topojson@3"></script>
+
+  <link rel="stylesheet" href="style.css">
+
   <script defer src="main.js"></script>
 </head>
 <body>
-  <label style="position:absolute;z-index:10;background:white;padding:5px">
-    地図背景表示:
-    <input type="checkbox" id="toggleMap">
+  <label class="control-panel">
+    マップスタイル:
+    <select id="styleSelector">
+      <option value="mapbox/streets-v12">Streets</option>
+      <option value="mapbox/outdoors-v12">Outdoors</option>
+      <option value="mapbox/light-v11">Light</option>
+      <option value="mapbox/dark-v11">Dark</option>
+      <option value="mapbox/satellite-v9">Satellites</option>
+    </select>
   </label>
 
-  <script>
-    // ✅ localStorage に保存された値でチェック状態を復元
-    const saved = localStorage.getItem("showMap");
-    document.getElementById("toggleMap").checked = saved !== "false";
-  </script>
+  <div id="map"></div>
 </body>
 </html>

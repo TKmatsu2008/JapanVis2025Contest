@@ -4,10 +4,20 @@ body {
   font-family: sans-serif;
 }
 
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
 svg {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #f7f7f7;
+  pointer-events: none;
 }
 
 .station {
@@ -23,4 +33,16 @@ svg {
   font-family: sans-serif;
   pointer-events: none;
   text-shadow: 1px 1px 2px #fff;
+}
+
+.control-panel {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  background: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
 }

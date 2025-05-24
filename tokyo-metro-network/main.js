@@ -2,94 +2,92 @@
 
 const width = window.innerWidth;
 const height = window.innerHeight;
-const BASE_ANIMATION_TIME = 1000; // 1分あたりの基準時間（ms）
-const DASH_SOLID = 8;  // 点線の線の長さ
-const DASH_GAP = 12;   // 点線の間隔
-const FLOW_DISTANCE = 100; // 一度に流す距離（点線の動き量）
-const MIN_WIDTH = 0.1; // エッジの最小太さ
-const MAX_WIDTH = 10; // エッジの最大太さ
+const BASE_ANIMATION_TIME = 1000;
+const DASH_SOLID = 8;
+const DASH_GAP = 12;
+const FLOW_DISTANCE = 100;
+const MIN_WIDTH = 0.1;
+const MAX_WIDTH = 10;
 
-const svg = d3.select("body").append("svg")
-  .attr("width", width)
-  .attr("height", height);
+mapboxgl.accessToken = 'pk.eyJ1IjoidGFrYWthaS1tYXAiLCJhIjoiY21iMXkxMzgyMDFpMjJsczl5NXZ2aHIybCJ9.R1eVrXB5fwLu95hV-BBY7w';
 
-document.getElementById("toggleMap").addEventListener("change", (e) => {
-  localStorage.setItem("showMap", e.target.checked);
-  window.location.reload();
+// スタイルセレクター取得と復元
+const styleSelector = document.getElementById("styleSelector");
+const savedStyle = localStorage.getItem("mapStyle") || "mapbox/dark-v11";
+if (styleSelector) {
+  styleSelector.value = savedStyle;
+}
+// スタイル変更時のイベントリスナー
+if (styleSelector) {
+  styleSelector.addEventListener("change", (e) => {
+    const newStyle = e.target.value;
+    localStorage.setItem("mapStyle", newStyle);
+    map.setStyle(`mapbox://styles/${newStyle}`); // ← 修正ポイント（テンプレートリテラル）
+  });
+}
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: `mapbox://styles/${savedStyle}`,
+  center: [139.76, 35.68],
+  zoom: 10
 });
 
-const showMap = localStorage.getItem("showMap") !== "false";
+let svg;
+let nodeDataGlobal, edgeDataGlobal;
 
 Promise.all([
-  fetch("data/Node_metro_toei.json").then(d => d.json()),
-  fetch("data/Edge_metro_toei_fulltime.json").then(d => d.json()),
-  showMap ? d3.json("https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson") : Promise.resolve(null)
-]).then(([nodeData, edgeData, geoData]) => {
-  const longitudes = nodeData.nodes.map(d => d.lon);
-  const latitudes = nodeData.nodes.map(d => d.lat);
-  const lonExtent = d3.extent(longitudes);
-  const latExtent = d3.extent(latitudes);
-
-  const projection = d3.geoMercator()
-    .center([(lonExtent[0] + lonExtent[1]) / 2, (latExtent[0] + latExtent[1]) / 2])
-    .translate([width / 2, height / 2])
-    .scale(1);
-
-  const path = d3.geoPath().projection(projection);
-  const projectedMin = projection([lonExtent[0], latExtent[0]]);
-  const projectedMax = projection([lonExtent[1], latExtent[1]]);
-  const dx = projectedMax[0] - projectedMin[0];
-  const dy = projectedMax[1] - projectedMin[1];
-  const scale = 0.95 / Math.max(dx / width, dy / height);
-  projection.scale(scale);
-
-  if (showMap && geoData) {
-    svg.append("g")
-      .attr("class", "background-map")
-      .selectAll("path")
-      .data(geoData.features)
-      .join("path")
-      .attr("d", path)
-      .attr("fill", "#f1f1f1")
-      .attr("stroke", "#aaa");
-  }
-
-  renderNetwork(nodeData, edgeData, projection);
+  fetch("data/Node_metro_toei.json").then(res => res.json()),
+  fetch("data/Edge_metro_toei_fulltime.json").then(res => res.json())
+]).then(([nodeData, edgeData]) => {
+  nodeDataGlobal = nodeData;
+  edgeDataGlobal = edgeData;
+  setupAndRender();
 });
 
-function renderNetwork(nodeData, edgeData, projection) {
-  const nodes = nodeData.nodes.map(d => {
-    const [x, y] = projection([d.lon, d.lat]);
-    return { id: d.id, x, y, passengers: d.passengers };
-  });
+// マップスタイル変更時に再描画する
+map.on("style.load", () => {
+  if (nodeDataGlobal && edgeDataGlobal) {
+    setupAndRender();
+  }
+});
 
-  const nodeMap = new Map(nodes.map(d => [d.id, d]));
+function setupAndRender() {
+  // SVGの再作成
+  svg?.remove();
+  svg = d3.select(map.getCanvasContainer()).append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .style("position", "absolute")
+    .style("top", 0)
+    .style("left", 0)
+    .style("pointer-events", "none");
 
-  // --- エッジ太さスケーリング設定 ---
-  // 駅間の往復本数（countA→B + countB→A）を取得
+  renderNetwork(nodeDataGlobal, edgeDataGlobal);
+}
+
+function project(lon, lat) {
+  const point = map.project([lon, lat]);
+  return [point.x, point.y];
+}
+
+function renderNetwork(nodeData, edgeData) {
+  // === スケール関数 ===
   const edgeCounts = edgeData.edges.map(d => {
     const forward = d.count || 0;
     const reverse = edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count || 0;
     return forward + reverse;
   });
 
-  // エッジ本数の最小〜最大を取得しスケーリング関数を定義
-  const countExtent = d3.extent(edgeCounts);
   const widthScale = d3.scaleLinear()
-    .domain(countExtent)
+    .domain(d3.extent(edgeCounts))
     .range([MIN_WIDTH, MAX_WIDTH]);
 
-  // --- エッジ（路線）描画とアニメーション ---
-  svg.selectAll(".line")
+  // === SVG要素を準備（中身は後で更新） ===
+  const lines = svg.selectAll(".line")
     .data(edgeData.edges)
     .join("line")
     .attr("class", "line")
-    .attr("x1", d => nodeMap.get(d.station_a)?.x)
-    .attr("y1", d => nodeMap.get(d.station_a)?.y)
-    .attr("x2", d => nodeMap.get(d.station_b)?.x)
-    .attr("y2", d => nodeMap.get(d.station_b)?.y)
     .attr("stroke", d => d.line_color)
-    // 太さを本数に応じてスケール変換
     .attr("stroke-width", d => {
       const forward = d.count || 0;
       const reverse = edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count || 0;
@@ -97,17 +95,15 @@ function renderNetwork(nodeData, edgeData, projection) {
     })
     .attr("stroke-linecap", "round")
     .attr("stroke-dasharray", `${DASH_SOLID} ${DASH_GAP}`)
+    .attr("stroke-opacity", 0.7)
     .each(function animate(d) {
       const line = d3.select(this);
       const duration = (d.duration || 3) * BASE_ANIMATION_TIME;
       let offset = -Math.random() * FLOW_DISTANCE;
-
       line.attr("stroke-dashoffset", offset);
-
       (function repeat() {
         offset -= FLOW_DISTANCE;
-        line
-          .transition()
+        line.transition()
           .duration(duration)
           .ease(d3.easeLinear)
           .attr("stroke-dashoffset", offset)
@@ -115,26 +111,37 @@ function renderNetwork(nodeData, edgeData, projection) {
       })();
     });
 
-  svg.selectAll(".station")
-    .data(nodes)
+  const circles = svg.selectAll(".station")
+    .data(nodeData.nodes)
     .join("circle")
     .attr("class", "station")
-    .attr("cx", d => d.x)
-    .attr("cy", d => d.y)
-    .attr("r", d => Math.sqrt(d.passengers) / 150)
+    .attr("r", d => Math.max(Math.sqrt(d.passengers || 1000) / 150, 2)) // サイズ保証
     .attr("fill", "steelblue")
-    .append("title")
+    .attr("stroke", "#333")
+    .attr("stroke-width", 1)
+    .attr("cx", d => project(d.lon, d.lat)[0]) 
+    .attr("cy", d => project(d.lon, d.lat)[1]);
+    
+  circles.append("title")
     .text(d => d.id);
 
-  const topStations = nodes.slice().sort((a, b) => b.passengers - a.passengers).slice(0, 20);
+  // === 座標更新関数（初回と地図移動時に呼び出す） ===
+  function updatePositions() {
+    const nodeMap = new Map(nodeData.nodes.map(d => [d.id, [d.lon, d.lat]]));
 
-  svg.selectAll(".station-label")
-    .data(topStations)
-    .join("text")
-    .attr("class", "station-label")
-    .attr("x", d => d.x + 6)
-    .attr("y", d => d.y - 6)
-    .text(d => d.id)
-    .attr("font-size", "10px")
-    .attr("fill", "#333");
+    lines
+      .attr("x1", d => project(...nodeMap.get(d.station_a))[0])
+      .attr("y1", d => project(...nodeMap.get(d.station_a))[1])
+      .attr("x2", d => project(...nodeMap.get(d.station_b))[0])
+      .attr("y2", d => project(...nodeMap.get(d.station_b))[1]);
+
+    circles
+      .attr("cx", d => project(d.lon, d.lat)[0])
+      .attr("cy", d => project(d.lon, d.lat)[1]);
+  }
+
+  // 初回描画 + 地図操作で更新
+  updatePositions();
+  map.on("move", updatePositions);
+  map.on("zoom", updatePositions);
 }
