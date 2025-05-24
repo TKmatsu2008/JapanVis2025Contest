@@ -2,12 +2,12 @@
 
 const width = window.innerWidth;
 const height = window.innerHeight;
-const BASE_ANIMATION_TIME = 1000;
-const DASH_SOLID = 8;
-const DASH_GAP = 12;
+const BASE_ANIMATION_TIME = 500;
+const DASH_SOLID = 10;
+const DASH_GAP = 70;
 const FLOW_DISTANCE = 100;
-const MIN_WIDTH = 0.1;
-const MAX_WIDTH = 10;
+const MIN_WIDTH = 0.3;
+const MAX_WIDTH = 8;
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFrYWthaS1tYXAiLCJhIjoiY21iMXkxMzgyMDFpMjJsczl5NXZ2aHIybCJ9.R1eVrXB5fwLu95hV-BBY7w';
 
