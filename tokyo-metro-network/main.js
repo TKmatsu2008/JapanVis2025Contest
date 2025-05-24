@@ -8,7 +8,9 @@ const DASH_GAP = 100;
 const FLOW_DISTANCE = 100;
 const MIN_WIDTH = 0.3;
 const MAX_WIDTH = 6;
-const selectedHours = ["05"];// 時間帯指定
+const MIN_SPEED = 1000;
+const MAX_SPEED = 10000;
+const selectedHours = ["08"];// 時間帯指定
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFrYWthaS1tYXAiLCJhIjoiY21iMXkxMzgyMDFpMjJsczl5NXZ2aHIybCJ9.R1eVrXB5fwLu95hV-BBY7w';
 
@@ -98,9 +100,16 @@ function renderNetwork(nodeData, edgeData) {
     return forwardAll + reverseAll;
   });
   
-    const widthScale = d3.scaleLinear()
-      .domain(d3.extent(allEdgeCounts))
-      .range([MIN_WIDTH, MAX_WIDTH]);
+  const widthScale = d3.scaleLinear()
+    .domain(d3.extent(allEdgeCounts))
+    .range([MIN_WIDTH, MAX_WIDTH]);
+
+  const allDurations = filteredEdges.map(d => averageFromHours(d.average_time_by_hour, Object.keys(d.count_by_hour || {})))
+    .filter(d => typeof d === "number");
+  
+  const speedScale = d3.scaleLinear()
+    .domain(d3.extent(allDurations))
+    .range([MIN_SPEED, MAX_SPEED]);
 
   // === SVG要素を準備（中身は後で更新） ===
   const lines = svg.selectAll(".line")
@@ -122,7 +131,7 @@ function renderNetwork(nodeData, edgeData) {
     .each(function animate(d) {
       const line = d3.select(this);
       const avgTime = averageFromHours(d.average_time_by_hour, selectedHours);
-      const duration = (avgTime || 3) * BASE_ANIMATION_TIME;
+      const duration = speedScale(avgTime || 3);
       let offset = -Math.random() * FLOW_DISTANCE;
       line.attr("stroke-dashoffset", offset);
       (function repeat() {
