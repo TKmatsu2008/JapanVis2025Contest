@@ -42,8 +42,6 @@ function setupMapView(containerId, label, selectedHours, nodeData, edgeData) {
     center: globalCenter,
     zoom: globalZoom,
     interactive: true,
-    // attributionControl: false,
-    // logoPosition: "bottom-right"
   });
 
   allMaps.push(map);

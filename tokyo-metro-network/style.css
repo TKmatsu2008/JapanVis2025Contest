@@ -76,16 +76,12 @@ body {
   border: 1px solid #666;
 } */
 
-/* .mapboxgl-ctrl-logo,
-.mapboxgl-ctrl-attrib {
-  display: none !important;
+.mapboxgl-ctrl-logo {
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
 }
 
-.mapboxgl-ctrl-logo,
 .mapboxgl-ctrl-attrib {
-  display: none !important;
-  opacity: 0.4;
-  position: absolute !important;
-  right: 6px;
-  font-size: 10px;
-} */
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
