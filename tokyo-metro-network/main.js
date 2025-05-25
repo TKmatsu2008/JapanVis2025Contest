@@ -5,11 +5,11 @@ const height = window.innerHeight;
 const BASE_ANIMATION_TIME = 500;
 const DASH_SOLID = 20;//線の長さ
 const DASH_GAP = 100;//線の間隔
-const FLOW_DISTANCE = 100;//1回の移動量(固定で良い)
+const FLOW_DISTANCE = 50;//1回の移動量(固定で良い)
 const MIN_WIDTH = 0.5;
 const MAX_WIDTH = 3.5;
-const MIN_SPEED = 2500;
-const MAX_SPEED = 4000;
+const MIN_SPEED = 1200;
+const MAX_SPEED = 2000;
 const NODE_SIZE = 200;
 const TIME_SLOT_GROUPS = [
   { label: "早朝", hours: ["04", "05", "06"] },
@@ -159,9 +159,10 @@ function renderSingleView(map, svg, nodeData, edgeData, selectedHours) {
     .attr("class", "station")
     .attr("r", d => Math.max(Math.sqrt(d.passengers || 1000) / NODE_SIZE, 2))
     .attr("fill", "steelblue")
-    .attr("stroke", "#333")
-    .attr("stroke-width", 1)
+    .attr("stroke", "#aaa")
+    .attr("stroke-width", 0.3)
     .attr("fill-opacity", 0.9)
+    .attr("stroke-opacity", 0.7)
     .attr("cx", d => project(map, d.lon, d.lat)[0])
     .attr("cy", d => project(map, d.lon, d.lat)[1]);
 
