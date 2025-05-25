@@ -61,7 +61,7 @@ body {
   font-size: 10px;
 }
 
-.legend-item {
+/* .legend-item {//凡例の表示
   display: flex;
   align-items: center;
   margin-bottom: 1px;
@@ -74,14 +74,14 @@ body {
   margin-right: 4px;
   border-radius: 2px;
   border: 1px solid #666;
-}
-/* 
-.mapboxgl-ctrl-logo,
-.mapboxgl-ctrl-attrib {
-  display: none !important;
 } */
 
 /* .mapboxgl-ctrl-logo,
+.mapboxgl-ctrl-attrib {
+  display: none !important;
+}
+
+.mapboxgl-ctrl-logo,
 .mapboxgl-ctrl-attrib {
   display: none !important;
   opacity: 0.4;
