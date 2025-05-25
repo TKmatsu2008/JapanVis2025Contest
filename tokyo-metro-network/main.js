@@ -10,6 +10,7 @@ const MIN_WIDTH = 0.5;
 const MAX_WIDTH = 3.5;
 const MIN_SPEED = 2500;
 const MAX_SPEED = 4000;
+const NODE_SIZE = 200;
 const TIME_SLOT_GROUPS = [
   { label: "早朝", hours: ["04", "05", "06"] },
   { label: "朝", hours: ["07", "08", "09"] },
@@ -156,7 +157,7 @@ function renderSingleView(map, svg, nodeData, edgeData, selectedHours) {
     .data(nodeData.nodes)
     .join("circle")
     .attr("class", "station")
-    .attr("r", d => Math.max(Math.sqrt(d.passengers || 1000) / 150, 2))
+    .attr("r", d => Math.max(Math.sqrt(d.passengers || 1000) / NODE_SIZE, 2))
     .attr("fill", "steelblue")
     .attr("stroke", "#333")
     .attr("stroke-width", 1)
