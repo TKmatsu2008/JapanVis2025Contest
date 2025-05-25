@@ -3,13 +3,13 @@
 const width = window.innerWidth;
 const height = window.innerHeight;
 const BASE_ANIMATION_TIME = 500;
-const DASH_SOLID = 20;
-const DASH_GAP = 100;
-const FLOW_DISTANCE = 100;
-const MIN_WIDTH = 0.3;
-const MAX_WIDTH = 6;
-const MIN_SPEED = 1000;
-const MAX_SPEED = 10000;
+const DASH_SOLID = 20;//線の長さ
+const DASH_GAP = 100;//線の間隔
+const FLOW_DISTANCE = 100;//1回の移動量(固定で良い)
+const MIN_WIDTH = 0.5;
+const MAX_WIDTH = 3.5;
+const MIN_SPEED = 2500;
+const MAX_SPEED = 4000;
 const TIME_SLOT_GROUPS = [
   { label: "早朝", hours: ["04", "05", "06"] },
   { label: "朝", hours: ["07", "08", "09"] },
@@ -114,8 +114,7 @@ function renderSingleView(map, svg, nodeData, edgeData, selectedHours) {
   }).filter(v => typeof v === 'number');
 
   const widthScale = d3.scaleLinear().domain(d3.extent(allCounts)).range([MIN_WIDTH, MAX_WIDTH]);
-  const speedScale = d3.scaleLinear().domain(d3.extent(allDurations)).range([MIN_SPEED, MAX_SPEED]);
-  const moveScale = d3.scaleLinear().domain(d3.extent(allDurations)).range([FLOW_DISTANCE * 0.5, FLOW_DISTANCE * 2]);
+  const speedScale = d3.scaleLinear().domain(d3.extent(allCounts)).range([MAX_SPEED , MIN_SPEED]);
 
   const lines = svg.selectAll(".line")
     .data(filteredEdges)
@@ -134,9 +133,14 @@ function renderSingleView(map, svg, nodeData, edgeData, selectedHours) {
     .attr("stroke-dasharray", `${DASH_SOLID} ${DASH_GAP}`)
     .attr("stroke-opacity", 0.7)
     .each(function animate(d) {
-      const avgTime = averageFromHours(d.average_time_by_hour, selectedHours);
-      const duration = speedScale(avgTime || 3);
-      const move = moveScale(avgTime || 3);
+      const fwd = averageFromHours(d.count_by_hour, selectedHours) || 0;
+      const rev = averageFromHours(
+        edgeData.edges.find(e => e.station_a === d.station_b && e.station_b === d.station_a)?.count_by_hour,
+        selectedHours
+      ) || 0;
+      const freq = fwd+rev; 
+      const duration = speedScale(freq);
+      const move = FLOW_DISTANCE;
       let offset = -Math.random() * move;
       const line = d3.select(this);
       line.attr("stroke-dashoffset", offset);
@@ -158,6 +162,7 @@ function renderSingleView(map, svg, nodeData, edgeData, selectedHours) {
     .attr("fill", "steelblue")
     .attr("stroke", "#333")
     .attr("stroke-width", 1)
+    .attr("fill-opacity", 0.9)
     .attr("cx", d => project(map, d.lon, d.lat)[0])
     .attr("cy", d => project(map, d.lon, d.lat)[1]);
 
