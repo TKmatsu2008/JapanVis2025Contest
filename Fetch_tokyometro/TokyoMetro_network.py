@@ -6,7 +6,7 @@ from datetime import datetime
 from collections import defaultdict, Counter
 
 # APIキーを設定
-API_KEY = "58npykl0u0d8q97dycloymy2krwz2vouz6jxte3gmzkwr0feoifqbe644znnxykx"
+API_KEY = "YOUR_API_KEY"
 
 # %%
 TARGET_HOUR = 8 # 時間帯指定
