@@ -1,0 +1,6 @@
+{
+  "name": "tokyo-metro-network",
+  "scripts": {
+    "dev": "npx http-server -c-1 -o"
+  }
+}
