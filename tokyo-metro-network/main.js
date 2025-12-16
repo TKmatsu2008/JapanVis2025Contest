@@ -17,7 +17,7 @@ const TIME_SLOT_GROUPS = [
   { label: "早朝", hours: ["04", "05", "06"] },
 ];
 
-mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN_HERE';
+mapboxgl.accessToken = 'ENTER_YOUR_MAPBOX_ACCESS_TOKEN';
 // 共通保持：全マップで同期用の中心とズーム
 let globalCenter = [139.76, 35.68];
 let globalZoom = 12;
