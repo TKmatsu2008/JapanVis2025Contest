@@ -41,10 +41,12 @@ function setupMapView(containerId, label, selectedHours, nodeData, edgeData) {
     zoomControl: false // 必要に応じてコントロールを非表示
   });
 
-  // OpenStreetMapのタイルレイヤーを追加
-  // 暗めの地図にしたい場合はCartoDB DarkMatterなどもおすすめですが、ここでは標準OSMを使用し後述のフィルタで暗くします
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  // CartoDB Positron (シンプルで情報量が少ない地図) に変更
+  // 主要道路と地名のみが表示され、建物などは省略されています
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 20
   }).addTo(map);
 
   allMaps.push(map);
@@ -85,16 +87,16 @@ function project(map, lon, lat) {
   // Leaflet: lat, lon -> layer point (地図レイヤー上の座標)
   // L.svg()を使う場合はこちらを使用することで、地図の移動に自動追従します
   const point = map.latLngToLayerPoint(new L.LatLng(lat, lon));
-  return [point.x, point.y];
+  return [point.x, point.y];//緯度経度をwindow上の座標系に変換
 }
 
-function averageFromHours(obj, hours) {
+function averageFromHours(obj, hours) {//1時間あたりの平均値を計算
   const values = hours.map(h => obj?.[h]).filter(v => typeof v === 'number');
   if (values.length === 0) return null;
   return values.reduce((a, b) => a + b, 0) / values.length;
 }
 
-function renderSingleView(map, svg, nodeData, edgeData, selectedHours) {
+function renderSingleView(map, svg, nodeData, edgeData, selectedHours) {//実際に地図上にノードとエッジを描画
   const filteredEdges = edgeData.edges.filter(d => {
     const fwd = averageFromHours(d.count_by_hour, selectedHours) || 0;
     const rev = averageFromHours(
