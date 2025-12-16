@@ -17,7 +17,6 @@ const TIME_SLOT_GROUPS = [
   { label: "早朝", hours: ["04", "05", "06"] },
 ];
 
-mapboxgl.accessToken = 'ENTER_YOUR_MAPBOX_ACCESS_TOKEN';
 // 共通保持：全マップで同期用の中心とズーム
 let globalCenter = [139.76, 35.68];
 let globalZoom = 12;
@@ -34,29 +33,36 @@ Promise.all([
 });
 
 function setupMapView(containerId, label, selectedHours, nodeData, edgeData) {
-  const map = new mapboxgl.Map({
-    container: containerId,
-    style: 'mapbox://styles/mapbox/dark-v10',
-    center: globalCenter,
+  // Leafletマップの初期化
+  // Leafletは [lat, lon] の順序
+  const map = L.map(containerId, {
+    center: [globalCenter[1], globalCenter[0]],
     zoom: globalZoom,
-    interactive: true,
+    zoomControl: false // 必要に応じてコントロールを非表示
   });
+
+  // OpenStreetMapのタイルレイヤーを追加
+  // 暗めの地図にしたい場合はCartoDB DarkMatterなどもおすすめですが、ここでは標準OSMを使用し後述のフィルタで暗くします
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
 
   allMaps.push(map);
 
-  map.on("load", () => {
-    const svg = d3.select(map.getCanvasContainer()).append("svg")
-      .attr("width", "100%")
-      .attr("height", "100%")
-      .style("position", "absolute")
-      .style("top", 0)
-      .style("left", 0)
-      .style("pointer-events", "none");
+  // Leaflet標準のSVGレイヤーを使用（ズーム・パンのアニメーションに同期するため）
+  L.svg({ clickable: true }).addTo(map);
 
-    renderSingleView(map, svg, nodeData, edgeData, selectedHours);
-    // マップ明るさアニメーションを開始
-    startBrightnessAnimation(map);
-  });
+  // Leafletが作成したSVG要素を選択（overlayPane内に生成されます）
+  const svg = d3.select(map.getPane('overlayPane')).select('svg')
+    .style("pointer-events", "auto"); // インタラクションを有効化
+
+  const g = svg.append("g");
+
+  // 描画実行（svgではなくgに対して描画します）
+  renderSingleView(map, g, nodeData, edgeData, selectedHours);
+  
+  // マップ明るさアニメーションを開始
+  startBrightnessAnimation(map);
 
   map.on("move", () => {
     if (syncing) return;
@@ -67,7 +73,7 @@ function setupMapView(containerId, label, selectedHours, nodeData, edgeData) {
   
     allMaps.forEach(otherMap => {
       if (otherMap !== map) {
-        otherMap.jumpTo({ center, zoom });
+        otherMap.setView(center, zoom, { animate: false });
       }
     });
   
@@ -76,7 +82,9 @@ function setupMapView(containerId, label, selectedHours, nodeData, edgeData) {
 }
 
 function project(map, lon, lat) {
-  const point = map.project([lon, lat]);
+  // Leaflet: lat, lon -> layer point (地図レイヤー上の座標)
+  // L.svg()を使う場合はこちらを使用することで、地図の移動に自動追従します
+  const point = map.latLngToLayerPoint(new L.LatLng(lat, lon));
   return [point.x, point.y];
 }
 
@@ -181,8 +189,9 @@ function renderSingleView(map, svg, nodeData, edgeData, selectedHours) {
   }
 
   updatePositions();
-  map.on("move", updatePositions);
-  map.on("zoom", updatePositions);
+  // パン（移動）はLeafletが自動処理するため再計算不要
+  // ズーム終了時のみ再計算してサイズ等を調整
+  map.on("zoomend", updatePositions);
 }
 
 // --- Brightness animation for time-of-day effect ---
@@ -216,14 +225,15 @@ function startBrightnessAnimation(map, options = {}) {
 
   // prepare canvas transition to make changes smooth
   try {
-    const canvas = map.getCanvas();
+    // Leafletではタイルが表示されているペインを取得
+    const tilePane = map.getPane('tilePane');
     const transMs = Math.max(80, Math.floor(stepMs * 0.85));
-    if (canvas && canvas.style) {
-      canvas.style.transition = `filter ${transMs}ms linear`;
+    if (tilePane && tilePane.style) {
+      tilePane.style.transition = `filter ${transMs}ms linear`;
       // set initial brightness immediately
       const initHourFloat = currentMinute / 60;
       const initB = hourToBrightness(initHourFloat);
-      canvas.style.filter = `brightness(${initB})`;
+      tilePane.style.filter = `brightness(${initB})`;
       // set initial time display
       const initHour = Math.floor(initHourFloat);
       const initMinute = currentMinute % 60;
@@ -241,8 +251,8 @@ function startBrightnessAnimation(map, options = {}) {
     const b = hourToBrightness(hourFloat);
 
     try {
-      const canvas = map.getCanvas();
-      if (canvas && canvas.style) canvas.style.filter = `brightness(${b})`;
+      const tilePane = map.getPane('tilePane');
+      if (tilePane && tilePane.style) tilePane.style.filter = `brightness(${b})`;
     } catch (e) {
       // ignore
     }

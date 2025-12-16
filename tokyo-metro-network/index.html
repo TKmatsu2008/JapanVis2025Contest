@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <title>東京メトロ ネットワーク図</title>
 
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
   
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
   <link rel="stylesheet" href="style.css">
+  <script defer src="main.js"></script>
 </head>
 <body>
   <div id="legend">
@@ -33,6 +34,5 @@
   <div id="grid-container">
     <div class="map-cell"><div class="mapbox" id="map-早朝"></div><div class="label">early morning</div></div>
   </div>
-  <script defer src="main.js"></script>
 </body>
 </html>
