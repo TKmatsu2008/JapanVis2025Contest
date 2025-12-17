@@ -1,0 +1,105 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.station {
+  stroke: #333;
+  stroke-width: 1px;
+}
+
+.line {
+  stroke-opacity: 0.7;
+}
+
+.station-label {
+  font-family: sans-serif;
+  pointer-events: none;
+  text-shadow: 1px 1px 2px #fff;
+}
+
+.mapbox {
+  width: 100%;
+  height: 100vh; /* 画面いっぱいに表示 */
+}
+
+/* Make single map container take the whole viewport */
+#grid-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.map-cell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.mapbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.label {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 2px 6px;
+  font-size: 15px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+#legend {
+  position: fixed;
+  top: 4px;
+  right: 6px;
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  line-height: 1.2;
+  box-shadow: 0 0 4px rgba(0,0,0,0.15);
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 60px;
+}
+
+.legend-group-title {
+  font-weight: bold;
+  margin-top: 6px;
+  margin-bottom: 3px;
+  border-bottom: 1px solid #ccc;
+  font-size: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1px;
+}
+
+.color {
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  margin-right: 4px;
+  border-radius: 2px;
+  border: 1px solid #666;
+}
+
+.mapboxgl-ctrl-logo {
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
+
+.mapboxgl-ctrl-attrib {
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}

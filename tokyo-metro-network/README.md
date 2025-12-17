@@ -66,3 +66,43 @@ tokyo-metro-network/
 - [ ] D3 Zoomでの拡大・スクロール機能
 - [ ] 時間帯別の交通フロー（朝/昼/夜）アニメーション
 - [ ] 路線別ハイライト・フィルタ機能
+
+## 🔥 デプロイ方法（Firebase）
+
+**公開URL:** https://tokyo-metro-network.web.app
+
+プロジェクトメンバーが手動でデプロイする場合の手順です。
+
+1. **Firebase CLIのインストール**（初回のみ）
+   ```bash
+   npm install -g firebase-tools
+   ```
+
+2. **ログイン**
+   ```bash
+   firebase login
+   ```
+
+3. **デプロイ**
+   ```bash
+   firebase deploy
+   ```
+
+## 🔥 デプロイ方法（Firebase）
+
+プロジェクトメンバーが手動でデプロイする場合の手順です。
+
+1. **Firebase CLIのインストール**（初回のみ）
+   ```bash
+   npm install -g firebase-tools
+   ```
+
+2. **ログイン**
+   ```bash
+   firebase login
+   ```
+
+3. **デプロイ**
+   ```bash
+   firebase deploy
+   ```
